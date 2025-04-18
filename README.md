@@ -1,7 +1,7 @@
 # Regular Python (repy) 🐍
 
 [![PyPI Version](https://img.shields.io/pypi/v/stv_repy.svg)](https://pypi.org/project/stv_repy/)
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/starwindv/regular_python/blob/main/LICENSE)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://github.com/starwindv/regular-python/blob/main/LICENSE)
 
 > 一个专为Windows优化的Python通配符执行工具，弥补原生shell不支持`python /*/tar*get.py`的不足，支持多级目录匹配操作。
 
@@ -97,5 +97,5 @@ repy --rp-help
 
 ## 📜 许可证
 
-[MIT License](https://github.com/starwindv/regular_python/blob/main/LICENSE) © 2025 StarWindv (星灿长风v)  
+[MIT License](https://github.com/starwindv/regular-python/blob/main/LICENSE) © 2025 StarWindv (星灿长风v)  
 📧 联系作者：[starwindv.stv@gmail.com](mailto:starwindv.stv@gmail.com)
