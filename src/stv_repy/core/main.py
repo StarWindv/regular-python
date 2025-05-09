@@ -91,4 +91,7 @@ def main(__version__ = __version__):
     try:
         subprocess.run(cmd, check=True)
     except subprocess.CalledProcessError as e:
-        return
+        print()
+    except KeyboardInterrupt:
+        print()
+    print("Exit Regular Python Program.")
