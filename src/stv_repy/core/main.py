@@ -9,7 +9,7 @@ from stv_repy.utils.lang_utils import set_cn
 from stv_repy.utils.utils import output
 from stv_utils import system_check, is_ch
 
-__version__ = '0.0.2+github'
+__version__ = '0.0.3+github'
 
 def main(__version__ = __version__):
 
