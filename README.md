@@ -73,12 +73,17 @@ repy D:/*/*/*/target.py args
 repy --rp-help
 ```
 
+#### 5. 向Python解释器和脚本同时传参
+```bash
+repy D:/*/*/*/target.py script_args -- python_args
+```
+
 ---
 
 ## ⚠️ 注意事项
 
 1. **路径空格处理**  
-   若路径含空格，需用引号包裹（如`"My Project/*.py"`）。
+   若路径含空格，需用双引号包裹（如`"My Project/*.py"`）。
 
 2. **性能提示**  
    深层目录匹配（如`**/*.py`）因设备原因可能较慢，建议结合具体层级限制。
