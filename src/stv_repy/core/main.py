@@ -9,7 +9,8 @@ from stv_repy.utils.lang_utils import set_cn
 from stv_repy.utils.utils import output
 from stv_utils import system_check, is_ch
 
-__version__ = '0.0.1'
+__version__ = '0.0.2+github'
+
 def main(__version__ = __version__):
 
     parser, args, remaining = stv_parse()
@@ -38,20 +39,34 @@ def main(__version__ = __version__):
         print("Success!") if set_cn("rm") else print("Failed")
         return
 
-    # 分离路径模式与Python参数
+    # 分离路径模式、传递给脚本的参数和传递给Python解释器的参数
+    script_args = []
     python_args = []
+    patterns = []
+    
+    # 首先查找 '--' 分隔符
+    split_index = None
     if '--' in remaining:
-        idx = remaining.index('--')
-        patterns = remaining[:idx]
-        python_args = remaining[idx+1:]
+        split_index = remaining.index('--')
+        pre_dash_args = remaining[:split_index]
+        python_args = remaining[split_index+1:]
     else:
+        pre_dash_args = remaining
 
-        split_index = next((i for i, v in enumerate(remaining) if v.startswith('-')), None)
-        if split_index is not None:
-            patterns = remaining[:split_index]
-            python_args = remaining[split_index:]
+    # 处理 '--' 之前的参数，分离路径模式和脚本参数
+    path_patterns_done = False
+    for arg in pre_dash_args:
+        if not path_patterns_done:
+            # 检查是否是路径模式
+            if os.path.exists(arg) or '*' in arg or '?' in arg:
+                patterns.append(arg)
+            else:
+                # 如果遇到非路径参数，说明路径模式部分结束
+                path_patterns_done = True
+                script_args.append(arg)
         else:
-            patterns = remaining
+            # 路径模式部分已结束，所有后续参数都是脚本参数
+            script_args.append(arg)
 
     compiled_patterns = []
     for raw_pattern in patterns:
@@ -85,7 +100,8 @@ def main(__version__ = __version__):
         print("Not Support Unix-Like, Just Support Windows") if not system_check() else print(end='')
         return
 
-    cmd = ['python'] + matches + python_args
+    # 构建命令，正确排列参数
+    cmd = ['python'] + python_args + matches + script_args
     output(cmd)
 
     try:
